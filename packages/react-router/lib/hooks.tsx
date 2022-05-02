@@ -315,7 +315,7 @@ export function useRoutes(
         `path="${parentPath === "/" ? "*" : `${parentPath}/*`}">.`
     );
   }
-
+  // 
   let locationFromContext = useLocation();
 
   let location;
@@ -379,7 +379,6 @@ export function _renderMatches(
   parentMatches: RouteMatch[] = []
 ): React.ReactElement | null {
   if (matches == null) return null;
-
   return matches.reduceRight((outlet, match, index) => {
     return (
       <RouteContext.Provider

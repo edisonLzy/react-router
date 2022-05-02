@@ -3,6 +3,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import rollupReplace from "@rollup/plugin-replace";
 
+console.log(process.env.USE_SOURCE);
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -20,7 +22,7 @@ export default defineConfig({
         alias: {
           "react-router": path.resolve(
             __dirname,
-            "../../packages/react-router/index.tsx"
+            "../../packages/react-router/index.ts"
           ),
           "react-router-dom": path.resolve(
             __dirname,

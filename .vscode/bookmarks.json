@@ -1,0 +1,39 @@
+{
+	"files": [
+		{
+			"path": "packages/react-router/lib/components.tsx",
+			"bookmarks": [
+				{
+					"line": 186,
+					"column": 5,
+					"label": ""
+				},
+				{
+					"line": 203,
+					"column": 3,
+					"label": ""
+				},
+				{
+					"line": 270,
+					"column": 3,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "packages/react-router/lib/router.ts",
+			"bookmarks": [
+				{
+					"line": 245,
+					"column": 38,
+					"label": ""
+				},
+				{
+					"line": 254,
+					"column": 6,
+					"label": ""
+				}
+			]
+		}
+	]
+}

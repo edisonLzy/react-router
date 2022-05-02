@@ -184,6 +184,7 @@ export function Router({
   );
 
   let basename = normalizePathname(basenameProp);
+  // 构建navigation上下文
   let navigationContext = React.useMemo(
     () => ({ basename, navigator, static: staticProp }),
     [basename, navigator, staticProp]
@@ -200,7 +201,7 @@ export function Router({
     state = null,
     key = "default",
   } = locationProp;
-
+   // 构建location上下文
   let location = React.useMemo(() => {
     let trailingPathname = stripBasename(pathname, basename);
 
@@ -267,6 +268,7 @@ export function Routes({
  *
  * @see https://reactrouter.com/docs/en/v6/api#createroutesfromchildren
  */
+// 将 Route element 转换成配置结构
 export function createRoutesFromChildren(
   children: React.ReactNode
 ): RouteObject[] {

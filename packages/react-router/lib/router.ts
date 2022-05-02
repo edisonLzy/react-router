@@ -241,21 +241,23 @@ function rankRouteBranches(branches: RouteBranch[]): void {
 }
 
 const paramRe = /^:\w+$/;
-const dynamicSegmentValue = 3;
-const indexRouteValue = 2;
-const emptySegmentValue = 1;
-const staticSegmentValue = 10;
-const splatPenalty = -2;
+const dynamicSegmentValue = 3; // 动态参数计3分
+const indexRouteValue = 2; // 索引路由记2分 
+const emptySegmentValue = 1; // 空串则记1分(什么时候会出现空字符串)
+const staticSegmentValue = 10; // 存字符串则记10分
+const splatPenalty = -2; // \*记-2分
 const isSplat = (s: string) => s === "*";
 
 function computeScore(path: string, index: boolean | undefined): number {
   let segments = path.split("/");
   let initialScore = segments.length;
   if (segments.some(isSplat)) {
+    // 如果 path中存在 * , 则 -2
     initialScore += splatPenalty;
   }
 
   if (index) {
+    // index , 则+2
     initialScore += indexRouteValue;
   }
 
