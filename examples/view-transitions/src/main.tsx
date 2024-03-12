@@ -274,6 +274,7 @@ function Nav() {
           </ul>
         </li>
         <li>
+          {/* unstable_viewTransition使用 transition */}
           <Link to="/loader" unstable_viewTransition>
             Loader with delay
           </Link>{" "}
