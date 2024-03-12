@@ -295,6 +295,8 @@ export function useParams<
 >(): Readonly<
   [ParamsOrKey] extends [string] ? Params<ParamsOrKey> : Partial<ParamsOrKey>
 > {
+  // useParams消费的是 RouteContext.Provider 提供的 value
+  //! 因此只有在 Route 组件 下的子组件中使用useParams才能获取到正确的值
   let { matches } = React.useContext(RouteContext);
   let routeMatch = matches[matches.length - 1];
   return routeMatch ? (routeMatch.params as any) : {};
@@ -350,6 +352,7 @@ export function useRoutesImpl(
   dataRouterState?: RemixRouter["state"],
   future?: RemixRouter["future"]
 ): React.ReactElement | null {
+  // <Router/> 会渲染 NavigationContext.Provider 和 LocationContext.Provider
   invariant(
     useInRouterContext(),
     // TODO: This error is probably because they somehow have 2 versions of the
@@ -467,6 +470,8 @@ export function useRoutesImpl(
     matches &&
       matches.map((match) =>
         Object.assign({}, match, {
+          // Q: parentParams 为什么需要把 parentParams 传递给 match.params
+          // A: 因为在子路由中使用 useParams 时，需要获取父路由的参数
           params: Object.assign({}, parentParams, match.params),
           pathname: joinPaths([
             parentPathnameBase,

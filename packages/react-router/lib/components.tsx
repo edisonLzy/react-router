@@ -481,7 +481,7 @@ export function Router({
   if (locationContext == null) {
     return null;
   }
-
+  // TODO: 如何复制代码的位置到其他地方 ? 
   return (
     <NavigationContext.Provider value={navigationContext}>
       <LocationContext.Provider children={children} value={locationContext} />
@@ -665,9 +665,11 @@ export function createRoutesFromChildren(
   children: React.ReactNode,
   parentPath: number[] = []
 ): RouteObject[] {
+  // 
   let routes: RouteObject[] = [];
 
   React.Children.forEach(children, (element, index) => {
+    //
     if (!React.isValidElement(element)) {
       // Ignore non-elements. This allows people to more easily inline
       // conditionals in their route config.
@@ -677,7 +679,15 @@ export function createRoutesFromChildren(
     let treePath = [...parentPath, index];
 
     if (element.type === React.Fragment) {
-      // Transparently support React.Fragment and its children.
+      //! Transparently support React.Fragment and its children.
+      // 对于 Fragment 递归处理子元素
+      /**
+       * 以下写法也是合法的
+       * ----------------
+       *  <>
+       *    <Route path="/parent/:id" element={<Parent />}>
+       *  </>
+       */
       routes.push.apply(
         routes,
         createRoutesFromChildren(element.props.children, treePath)
@@ -686,6 +696,7 @@ export function createRoutesFromChildren(
     }
 
     invariant(
+      // 通过 element.type 校验组件是否为 Route
       element.type === Route,
       `[${
         typeof element.type === "string" ? element.type : element.type.name
@@ -696,7 +707,7 @@ export function createRoutesFromChildren(
       !element.props.index || !element.props.children,
       "An index route cannot have child routes."
     );
-
+    // <Route/> 只是用来收集配置信息，不会渲染
     let route: RouteObject = {
       id: element.props.id || treePath.join("-"),
       caseSensitive: element.props.caseSensitive,

@@ -759,6 +759,7 @@ export function BrowserRouter({
   future,
   window,
 }: BrowserRouterProps) {
+  //
   let historyRef = React.useRef<BrowserHistory>();
   if (historyRef.current == null) {
     historyRef.current = createBrowserHistory({ window, v5Compat: true });

@@ -2,7 +2,7 @@
   "name": "basic",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "USE_SOURCE=true vite",
     "build": "tsc && vite build",
     "serve": "vite preview"
   },
